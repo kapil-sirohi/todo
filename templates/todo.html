@@ -1,0 +1,29 @@
+{% load static %}
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'kanBanBoard/static/todo/style.css' %}">
+</head>
+<h1>this is todo template</h1>
+
+<!--<ol>
+    <li>Temporary todo item A</li>
+    <li>Temporary todo item B</li>
+</ol>-->
+
+<ol>
+
+        {% for all_item in all_items %}
+            <li>{{ all_item.content }}</li>
+                <form action = "/deleteTodo/{{all_item.id}}" method="post" >
+                    {% csrf_token%}
+                    <input type="submit" value="Delete">
+                </form>
+        {% endfor %}
+</ol>
+
+<form action="/addTodo/" method="post">{% csrf_token%}
+    <input type="text" name="content" />
+    <input type="submit" name="Add" />
+</form>
+</html>
